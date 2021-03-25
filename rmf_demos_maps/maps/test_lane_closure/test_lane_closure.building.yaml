@@ -1,0 +1,36 @@
+levels:
+  L1:
+    correspondence_point_sets:
+      - ~
+    elevation: 0
+    flattened_x_offset: 0
+    flattened_y_offset: 0
+    floors:
+      - parameters: {texture_name: [1, blue_linoleum], texture_rotation: [3, 0], texture_scale: [3, 1]}
+        vertices: [0, 1, 2, 3]
+    lanes:
+      - [4, 6, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [6, 5, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [4, 7, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [7, 5, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [4, 8, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""]}]
+      - [8, 5, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""]}]
+    layers:
+      {}
+    measurements:
+      - [0, 1, {distance: [3, 20]}]
+    vertices:
+      - [2.084, 1.398, 0, ""]
+      - [399.025, 0.631, 0, ""]
+      - [399.28, 198.463, 0, ""]
+      - [1.573, 199.229, 0, ""]
+      - [42.724, 89.834, 0, start, {is_charger: [4, true], spawn_robot_name: [1, tinyRobot_1], spawn_robot_type: [1, TinyRobot]}]
+      - [351.143, 93.044, 0, end]
+      - [198.354, 33.405, 0, ""]
+      - [196.366, 108.379, 0, ""]
+      - [191.538, 176.254, 0, ""]
+    x_meters: 20
+    y_meters: 10
+lifts:
+  {}
+name: building
