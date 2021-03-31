@@ -1,32 +1,63 @@
-#-----------------
-# Stage 1 - build
-#-----------------
+#-----------------------
+# Stage 1 - Dependencies
+#-----------------------
 
 FROM ros:foxy AS builder
 
-COPY . /root/rmf/src
+RUN apt-get update \
+  && apt-get install -y \
+    cmake \
+    curl \
+    git \
+    python3-colcon-common-extensions \
+    python3-requests \
+    python3-shapely \
+    python3-vcstool \
+    python3-yaml \
+    python3-flask-cors \
+    qt5-default \
+    wget \
+    # npm \
+    python3-pip \
+  && pip3 install flask-socketio \
+  && rm -rf /var/lib/apt/lists/*
 
-SHELL ["bash", "-c"]
+# setup keys
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys D2486D2DD83DB69272AFE98867170598AF249743
 
-# add gazebo/ignition repo
-RUN apt-get update && apt-get install -y curl wget \
-  && sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list' \
-  && wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
+# setup sources.list
+RUN . /etc/os-release \
+    && echo "deb http://packages.osrfoundation.org/gazebo/$ID-stable `lsb_release -sc` main" > /etc/apt/sources.list.d/gazebo-latest.list
 
-# install ros dependencies
-RUN cd /root/rmf && apt-get update && rosdep update && rosdep install --from-paths src --ignore-src -yr
+RUN mkdir $HOME/rmf_demos_ws
+WORKDIR $HOME/rmf_demos_ws
+RUN mkdir src
+RUN rosdep update --rosdistro $ROS_DISTRO
+RUN wget https://raw.githubusercontent.com/open-rmf/rmf/main/rmf.repos \
+    && vcs import src < rmf.repos \
+    && apt-get update \
+    && apt-get upgrade -y \
+    && rosdep update \
+    && rosdep install --from-paths src --ignore-src --rosdistro $ROS_DISTRO -yr \
+    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update \
+    && apt-get install -y ignition-dome \
+    && rm -rf /var/lib/apt/lists/*
 
-# other dependencies
-RUN apt-get update && apt-get install -y \
-  # needed by traffic editor
-  libignition-common3-dev libignition-plugin-dev
+#-----------------
+# Stage 2 - build
+#-----------------
 
-# build rmf
-RUN . /opt/ros/foxy/setup.bash && cd /root/rmf && \
-  colcon build --merge-install --install-base /opt/rmf --cmake-args -DCMAKE_BUILD_TYPE=Release
+# compile rmf_demo_panel gui
+# RUN npm install --prefix src/demonstrations/rmf_demos/rmf_demos_panel/rmf_demos_panel/static/ \
+#   && npm run build --prefix src/demonstrations/rmf_demos/rmf_demos_panel/rmf_demos_panel/static/
+
+# colcon compilation
+RUN . /opt/ros/$ROS_DISTRO/setup.sh \
+  && colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
 
 #----------
-# Stage 2
+# Stage 3
 #----------
 
 # TODO: rosdep doesn't support installing only exec dependencies (https://github.com/ros-infrastructure/rosdep/pull/727)
@@ -37,8 +68,8 @@ RUN . /opt/ros/foxy/setup.bash && cd /root/rmf && \
 # COPY --from=builder /root/rmf/install /opt/rmf
 
 # cleanup
-RUN rm -rf /root/rmf /var/lib/apt/lists/*
+RUN rm -rf build devel src \
+  && sed -i '$isource "/rmf_demos_ws/install/setup.bash"' /ros_entrypoint.sh
 
-ADD docker/rmf_entrypoint.bash /
-ENTRYPOINT ["/rmf_entrypoint.bash"]
+ENTRYPOINT ["/ros_entrypoint.bash"]
 CMD ["bash"]
