@@ -3,7 +3,7 @@
 <launch>
   <arg name="use_ignition" default="0"/>
   <arg name="gazebo_version" default="11"/>
-  <arg name="use_sim_time" default="true"/>
+  <arg name="use_sim_time" default="false"/>
 
   <!-- Common launch -->
   <include file="$(find-pkg-share rmf_demos)/common.launch.xml">
@@ -14,11 +14,11 @@
   </include>
 
   <!-- Simulation launch -->
-  <include file="$(find-pkg-share rmf_demos)/simulation.launch.xml">
-    <arg name="map_name" value="office" />
-    <arg name="use_ignition" value="$(var use_ignition)" />
-    <arg name="gazebo_version" value="$(var gazebo_version)" />
-  </include>
+  <!--<include file="$(find-pkg-share rmf_demos)/simulation.launch.xml">-->
+    <!--<arg name="map_name" value="office" />-->
+    <!--<arg name="use_ignition" value="$(var use_ignition)" />-->
+    <!--<arg name="gazebo_version" value="$(var gazebo_version)" />-->
+  <!--</include>-->
 
   <!-- TinyRobot fleet adapter and robot state aggregator needed for the TinyRobot slotcar_plugin -->
   <group>
