@@ -1,6 +1,6 @@
 crowd_sim:
   agent_groups:
-    - {agents_name: [tinyRobot1, tinyRobot2], agents_number: 2, group_id: 0, profile_selector: external_agent, state_selector: external_static, x: 0, y: 0}
+    - {agents_name: [], agents_number: 2, group_id: 0, profile_selector: external_agent, state_selector: external_static, x: 0, y: 0}
   agent_profiles:
     - {ORCA_tau: 1, ORCA_tauObst: 0.4, class: 1, max_accel: 0, max_angle_vel: 0, max_neighbors: 10, max_speed: 0, name: external_agent, neighbor_dist: 5, obstacle_set: 1, pref_speed: 0, r: 0.25}
   enable: 0
@@ -176,7 +176,7 @@ levels:
       - [814.828, 239.25, 0, "", {is_parking_spot: [4, false]}]
       - [1210.544, 365.254, 0, ""]
       - [1201.404, 796.268, 0, ""]
-      - [1232.421, 658.567, 0, tinyRobot1_charger, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, tinyRobot1], spawn_robot_type: [1, TinyRobot]}]
+      - [1232.421, 658.567, 0, tinyRobot1_charger, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true]}]
       - [1989.668, 796.268, 0, ""]
       - [1985.667, 644.216, 0, pantry, {is_holding_point: [4, true], is_parking_spot: [4, false]}]
       - [2212.743, 751.252, 0, "", {is_parking_spot: [4, false]}]
@@ -201,7 +201,7 @@ levels:
       - [769.867, 618.148, 0, ""]
       - [2016.125, 1310.955, 0, ""]
       - [2468.096, 1217.693, 0, ""]
-      - [2412.581, 627.5, 0, tinyRobot2_charger, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, tinyRobot2], spawn_robot_type: [1, TinyRobot]}]
+      - [2412.581, 627.5, 0, tinyRobot2_charger, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true]}]
     walls:
       - [6, 7, {alpha: [3, 1], texture_name: [1, default]}]
       - [7, 12, {alpha: [3, 1], texture_name: [1, default]}]
