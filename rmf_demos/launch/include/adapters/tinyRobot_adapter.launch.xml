@@ -17,7 +17,7 @@
       <arg name="nav_graph_file" value="$(var nav_graph_file)" />
 
       <!-- The nominal linear and angular velocity of this fleet's vehicles -->
-      <arg name="linear_velocity" value="0.5"/>
+      <arg name="linear_velocity" value="0.7"/>
       <arg name="angular_velocity" value="2.0"/>
 
       <!-- The nominal linear and angular acceleration of this fleet's vehicles -->
@@ -68,6 +68,8 @@
 
       <!-- Battery level at which the robot ceases to operate -->
       <arg name="recharge_threshold" value="0.0000000001"/>
+
+      <arg name="reversible" value="false"/>
 
     </include>
   </group>
