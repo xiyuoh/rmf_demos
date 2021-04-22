@@ -23,6 +23,13 @@
     <param name="update_state_frequency" value="20.0"/>
     <param name="publish_state_frequency" value="2.0"/>
 
+    <!-- gaussian -->
+    <!--<param name="translation_x" value="-2.38"/>-->
+    <!--<param name="translation_y" value="9.72"/>-->
+    <!--<param name="rotation" value="0.456"/>-->
+    <!--<param name="scale" value="0.89"/>-->
+
+    <!-- cloud turtlebot -->
     <param name="translation_x" value="-2.8814"/>
     <param name="translation_y" value="10.67"/>
     <param name="rotation" value="0.355"/>
