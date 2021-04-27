@@ -1,0 +1,27 @@
+{
+  "world_name" : "Demo World",  
+  "valid_task": ["Loop"],
+  "task": {
+    "Delivery": {
+    },
+    "Loop": {
+      "places": [
+        "coe",
+        "pantry",
+        "lounge",
+        "supplies",
+        "hardware_2",
+        "tinyRobot1_charger",
+        "tinyRobot2_charger"
+      ]
+    },
+    "Clean": {
+    },
+    "Station": {
+    },
+    "Patrol": {
+    },
+    "Charging": {
+    }
+  }
+}

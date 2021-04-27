@@ -1,0 +1,6 @@
+building:
+  filename: demo.building.yaml
+name: demo
+traffic_maps:
+  {}
+version: 1

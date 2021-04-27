@@ -14,7 +14,7 @@
 
 
 """
-The main API Interfaces (with port 8080):
+The main API Interfaces (with port 6600):
 1) HTTP interfaces are:  /submit_task, /cancel_task, /task_list, /robot_list
 2) socketIO broadcast states: /task_status, /robot_states, /ros_time
 """
@@ -125,7 +125,7 @@ def broadcast_states():
 
 def main(args=None):
     server_ip = "0.0.0.0"
-    port_num = 8080
+    port_num = 6600
 
     if "WEB_SERVER_IP_ADDRESS" in os.environ:
         server_ip = os.environ['WEB_SERVER_IP_ADDRESS']
