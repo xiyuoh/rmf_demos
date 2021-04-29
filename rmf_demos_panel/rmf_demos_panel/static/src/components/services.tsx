@@ -1,7 +1,7 @@
 import { showErrorMessage, showSuccessMessage } from './fixed-components/messages';
 
-const API_SERVER_ADD = "http://" + location.hostname + ":6600"
-const GUI_SERVER_ADD = "http://" + location.hostname + ":6500"
+const API_SERVER_ADD = "https://" + location.hostname + ":6600"
+const GUI_SERVER_ADD = "https://" + location.hostname + ":6500"
 
 //API endpoints
 export const getRobots = async () => {
