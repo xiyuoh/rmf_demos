@@ -1,0 +1,82 @@
+crowd_sim:
+  agent_groups:
+    - {agents_name: [kobuki1], agents_number: 1, group_id: 0, profile_selector: external_agent, state_selector: external_static, x: 0, y: 0}
+  agent_profiles:
+    - {ORCA_tau: 1, ORCA_tauObst: 0.4, class: 1, max_accel: 0, max_angle_vel: 0, max_neighbors: 10, max_speed: 0, name: external_agent, neighbor_dist: 5, obstacle_set: 1, pref_speed: 0, r: 0.25}
+  enable: 0
+  goal_sets:
+    []
+  model_types:
+    []
+  obstacle_set: {class: 1, file_name: L1_navmesh.nav, type: nav_mesh}
+  states:
+    - {final: 1, goal_set: -1, name: external_static, navmesh_file_name: ""}
+  transitions:
+    []
+  update_time_step: 0.1
+levels:
+  L1:
+    drawing:
+      filename: show.png
+    elevation: 0
+    flattened_x_offset: 0
+    flattened_y_offset: 0
+    floors:
+      - parameters: {texture_name: [1, blue_linoleum], texture_rotation: [3, 0], texture_scale: [3, 1]}
+        vertices: [17, 22, 16, 15, 23, 14, 13, 12, 9, 10, 11, 7, 6, 21, 20, 19, 18]
+    lanes:
+      - [24, 25, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], orientation: [1, ""]}]
+    layers:
+      {}
+    measurements:
+      - [1, 0, {distance: [3, 9.315]}]
+      - [5, 4, {distance: [3, 8.409000000000001]}]
+      - [2, 3, {distance: [3, 20.089]}]
+    vertices:
+      - [80.27, 1024.974, 0, ""]
+      - [580.795, 43.396, 0, ""]
+      - [258.725, 1426.884, 0, ""]
+      - [2624.464, 1625.219, 0, ""]
+      - [2809.312, 1349.93, 0, ""]
+      - [2951.32, 368.569, 0, ""]
+      - [1663.159, 302.319, 0, ""]
+      - [2797.635, 340.467, 0, ""]
+      - [2734.609, 712.544, 0, ""]
+      - [2298.952, 1363.264, 0, ""]
+      - [2657.208, 1331.751, 0, ""]
+      - [2690.932, 1025.465, 0, ""]
+      - [1619.482, 1417.998, 0, ""]
+      - [1274.496, 1411.916, 0, ""]
+      - [931.72, 1359.394, 0, ""]
+      - [591.037, 1263.173, 0, ""]
+      - [269.05, 1125.229, 0, ""]
+      - [771.683, 135.085, 0, ""]
+      - [1002.591, 229.438, 0, ""]
+      - [1195.809, 279.98, 0, ""]
+      - [1395.345, 308.146, 0, ""]
+      - [1439.306, 307.093, 0, ""]
+      - [612.9690000000001, 445.59, 0, ""]
+      - [655.919, 1280.411, 0, ""]
+      - [966.062, 817.023, 0, a, {is_charger: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, kobuki1], spawn_robot_type: [1, TinyRobot]}]
+      - [2309.702, 852.914, 0, b]
+    walls:
+      - [7, 6, {alpha: [3, 1], texture_name: [1, default]}]
+      - [7, 8, {alpha: [3, 1], texture_name: [1, default]}]
+      - [10, 11, {alpha: [3, 1], texture_name: [1, default]}]
+      - [8, 11, {alpha: [3, 1], texture_name: [1, default]}]
+      - [9, 10, {alpha: [3, 1], texture_name: [1, default]}]
+      - [12, 9, {alpha: [3, 1], texture_name: [1, default]}]
+      - [14, 13, {alpha: [3, 1], texture_name: [1, default]}]
+      - [13, 12, {alpha: [3, 1], texture_name: [1, default]}]
+      - [16, 15, {alpha: [3, 1], texture_name: [1, default]}]
+      - [21, 20, {alpha: [3, 1], texture_name: [1, default]}]
+      - [20, 19, {alpha: [3, 1], texture_name: [1, default]}]
+      - [19, 18, {alpha: [3, 1], texture_name: [1, default]}]
+      - [18, 17, {alpha: [3, 1], texture_name: [1, default]}]
+      - [17, 22, {alpha: [3, 1], texture_name: [1, default]}]
+      - [16, 22, {alpha: [3, 1], texture_name: [1, default]}]
+      - [15, 23, {alpha: [3, 1], texture_name: [1, default]}]
+      - [23, 14, {alpha: [3, 1], texture_name: [1, default]}]
+lifts:
+  {}
+name: building
