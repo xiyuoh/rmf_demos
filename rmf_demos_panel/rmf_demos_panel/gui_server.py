@@ -72,7 +72,7 @@ def config():
 
 def main(args=None):
     server_ip = "0.0.0.0"
-    port_num = 5000
+    port_num = 5050
 
     download_webpack()
 

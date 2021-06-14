@@ -65,7 +65,7 @@ ros2 launch rmf_demos office.launch.xml
 
 To send task requests, open RMF Panel from a browser
 ```bash
-firefox localhost:5000
+firefox localhost:5050
 ```
 
 To submit a delivery task, select `Delivery` from the `Select a request type` dropdown list. Next, select `coke` from the `Select delivery task` list. Choose an desired start time for task and click submit.

@@ -129,5 +129,5 @@ The dashboard config file is located here: `rmf_demos_dashboard_resources/$WORLD
   ```bash
   export DASHBOARD_CONFIG_PATH=src/rmf/rmf_demos/rmf_demos_dashboard_resources/office/dashboard_config.json
   python src/rmf/rmf_demos/rmf_demos_panel/rmf_demos_panel/gui_server.py
-  # Then, access localhost:5000 on browser
+  # Then, access localhost:5050 on browser
   ```
