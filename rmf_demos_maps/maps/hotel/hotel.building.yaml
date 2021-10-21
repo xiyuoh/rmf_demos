@@ -109,13 +109,13 @@ levels:
       - {model_name: OpenRobotics/MainTable, name: OpenRobotics/MainTable, static: true, x: 295.781, y: 287.201, yaw: -3.1416, z: 0}
       - {model_name: OpenRobotics/KitchenCountertop, name: OpenRobotics/KitchenCountertop, static: true, x: 329.496, y: 176.119, yaw: -0, z: 0}
       - {model_name: OpenRobotics/KitchenCountertop, name: OpenRobotics/KitchenCountertop, static: true, x: 374.86, y: 177.446, yaw: -0, z: 0}
-      - {model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 159.623, y: 315.681, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 159.377, y: 279.215, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 151.684, y: 319.073, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 152.51, y: 290.968, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 183.162, y: 250.798, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 259.432, y: 177.912, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 258.7, y: 153.666, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 289.448, y: 153.354, yaw: 1.5708, z: 0}
-      - {model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 289.507, y: 177.55, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 259.35, y: 174.209, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 259.557, y: 147.551, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 289.935, y: 146.724, yaw: 1.5708, z: 0}
+      - {model_name: OpenRobotics/CoffeeTable, name: OpenRobotics/CoffeeTable, static: true, x: 290.142, y: 174.829, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/StorageRack, name: OpenRobotics/StorageRack, static: true, x: 61.962, y: 599.249, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/StorageRack, name: OpenRobotics/StorageRack, static: true, x: 61.962, y: 627.16, yaw: 1.5708, z: 0}
       - {model_name: OpenRobotics/StorageRack, name: OpenRobotics/StorageRack, static: true, x: 62.792, y: 659.889, yaw: 1.5708, z: 0}
@@ -169,11 +169,11 @@ levels:
       - [551.357, 467.403, 0, ""]
       - [591.327, 468.224, 0, ""]
       - [589.958, 594.979, 0, ""]
-      - [478.261, 595.252, 0, ""]
-      - [479.083, 657.9450000000001, 0, ""]
+      - [479.85, 594.129, 0, ""]
+      - [479.85, 657.985, 0, ""]
       - [589.1369999999999, 657.124, 0, ""]
       - [589.6849999999999, 722.0069999999999, 0, ""]
-      - [477.987, 723.923, 0, ""]
+      - [479.436, 723.081, 0, ""]
       - [397.774, 725.566, 0, ""]
       - [332.617, 725.8390000000001, 0, ""]
       - [229.106, 725.675, 0, ""]
@@ -211,9 +211,9 @@ levels:
       - [351.869, 171.799, 0, kitchen, {is_holding_point: [4, true]}]
       - [267.187, 243.188, 0, ""]
       - [460.888, 560.763, 0, ""]
-      - [456.907, 604.013, 0, ""]
-      - [427.128, 636.684, 0, clean_lobby, {dock_name: [1, clean_lobby], is_cleaning_zone: [4, true]}]
-      - [271.953, 601.795, 0, ""]
+      - [452.985, 596.196, 0, ""]
+      - [428.186, 637.526, 0, clean_lobby, {dock_name: [1, clean_lobby], is_cleaning_zone: [4, true]}]
+      - [271.336, 599.295, 0, ""]
       - [252.278, 441.23, 0, ""]
       - [203.735, 403.318, 0, ""]
       - [153.759, 417.897, 0, clean_waiting_area, {dock_name: [1, clean_waiting_area], is_cleaning_zone: [4, true]}]
@@ -229,11 +229,10 @@ levels:
       - [261.443, 700.003, 0, deliverybot_charger, {is_charger: [4, true], is_holding_point: [4, true], is_parking_spot: [4, true], spawn_robot_name: [1, deliveryBot_1], spawn_robot_type: [1, DeliveryRobot]}]
       - [354.274, 388.677, 0, ""]
       - [353.63, 338.352, 0, "", {is_passthrough_point: [4, true]}]
-      - [456.621, 636.703, 0, clean_lobby_start]
+      - [454.844, 638.353, 0, clean_lobby_start]
       - [153.378, 393.876, 0, clean_waiting_area_start]
       - [297.116, 202.189, 0, ""]
       - [318.71, 249.37, 0, ""]
-      - [203.626, 139.168, 0, ""]
       - [231.239, 254.141, 0, ""]
       - [435.409, 696.218, 0, ""]
       - [328.385, 693.624, 0, ""]
