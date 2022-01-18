@@ -29,13 +29,15 @@ from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSReliabilityPolicy as Reliability
 
 from rmf_fleet_msgs.msg import RobotState, Location, PathRequest, \
-    DockSummary
+    GeoPathRequest, DockSummary
 
 import rmf_adapter as adpt
 import rmf_adapter.vehicletraits as traits
 import rmf_adapter.geometry as geometry
 
 import numpy as np
+import copy
+from pyproj import Transformer
 
 from fastapi import FastAPI
 import uvicorn
@@ -119,6 +121,11 @@ class FleetManager(Node):
             'robot_path_requests',
             qos_profile=qos_profile_system_default)
 
+        self.gps_path_pub = self.create_publisher(
+            GeoPathRequest,
+            'robot_gps_path_requests',
+            qos_profile=qos_profile_system_default)
+
         self.task_id = -1
 
         @app.get('/open-rmf/rmf_demos_fm/status/',
@@ -187,6 +194,21 @@ class FleetManager(Node):
             self.task_id = self.task_id + 1
             path_request.task_id = str(self.task_id)
             self.path_pub.publish(path_request)
+
+            # Send GeoPathRequest
+            gps_path_request = GeoPathRequest()
+            cart_crs = 'EPSG:3414'
+            gps_crs = 'EPSG:4326'
+            crs_transformer = Transformer.from_crs(cart_crs, gps_crs)
+            gps_path_request.fleet_name = self.fleet_name
+            gps_path_request.robot_name = robot_name
+            gps_path_request.task_id = str(self.task_id)
+            gps_path_request.coordinate_system = gps_crs
+            for wp in path_request.path:
+                gps_wp = copy.deepcopy(wp)
+                gps_wp.x, gps_wp.y = crs_transformer.transform(wp.x, wp.y)
+                gps_path_request.path.append(gps_wp)
+            self.gps_path_pub.publish(gps_path_request)
 
             self.robots[robot_name].destination = target_loc
 
