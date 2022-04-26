@@ -29,13 +29,14 @@ from rclpy.qos import QoSDurabilityPolicy as Durability
 from rclpy.qos import QoSReliabilityPolicy as Reliability
 
 from rmf_fleet_msgs.msg import RobotState, Location, PathRequest, \
-    DockSummary
+    DockSummary, GeoPathRequest
 
 import rmf_adapter as adpt
 import rmf_adapter.vehicletraits as traits
 import rmf_adapter.geometry as geometry
 
 import numpy as np
+from pyproj import Transformer
 
 from fastapi import FastAPI
 import uvicorn
@@ -96,6 +97,9 @@ class FleetManager(Node):
         self.vehicle_traits.differential.reversible =\
             self.config['rmf_fleet']['reversible']
 
+        self.wgs_transformer = Transformer.from_crs('EPSG:3414', 'EPSG:4326')
+        self.svy_transformer = Transformer.from_crs('EPSG:4326', 'EPSG:3414')
+
         self.create_subscription(
             RobotState,
             'robot_state',
@@ -117,6 +121,11 @@ class FleetManager(Node):
         self.path_pub = self.create_publisher(
             PathRequest,
             'robot_path_requests',
+            qos_profile=qos_profile_system_default)
+
+        self.geo_path_pub = self.create_publisher(
+            GeoPathRequest,
+            'robot_gps_path_requests',
             qos_profile=qos_profile_system_default)
 
         self.task_id = -1
@@ -186,9 +195,50 @@ class FleetManager(Node):
             path_request.path.append(target_loc)
             self.task_id = self.task_id + 1
             path_request.task_id = str(self.task_id)
-            self.path_pub.publish(path_request)
+            # self.path_pub.publish(path_request)
 
             self.robots[robot_name].destination = target_loc
+
+            offset_x = 22892.85
+            offset_y = 31273.66
+
+            geo_path_request = GeoPathRequest()
+            geo_cur_loc = Location()
+            cur_lat, cur_lon = self.wgs_transformer.transform(cur_x + offset_x,
+                                                              cur_y + offset_y)
+            geo_cur_loc.x = cur_lat
+            geo_cur_loc.y = cur_lon
+            geo_cur_loc.yaw = cur_yaw
+            geo_path_request.path.append(geo_cur_loc)
+
+            geo_target_loc = Location()
+            geo_target_loc.t = t
+            target_lat, target_lon = self.wgs_transformer.transform(target_x + offset_x,
+                                                                    target_y + offset_y)
+            geo_target_loc.x = target_lat
+            geo_target_loc.y = target_lon
+            geo_target_loc.yaw = target_yaw
+            geo_target_loc.level_name = target_map
+            if target_speed_limit > 0:
+                geo_target_loc.obey_approach_speed_limit = True
+                geo_target_loc.approach_speed_limit = target_speed_limit
+
+            geo_path_request.fleet_name = self.fleet_name
+            geo_path_request.robot_name = robot_name
+            geo_path_request.coordinate_system = 'EPSG:4326'
+            geo_path_request.path.append(geo_target_loc)
+            self.get_logger().info(f'-----------------------------------------')
+            self.get_logger().info(f'----- cart_c: {cur_x}, {cur_y}')
+            self.get_logger().info(f'----- cart_t: {target_x}, {target_y}')
+            self.get_logger().info(f'------------------')
+            self.get_logger().info(f'----- real_c: {cur_x + offset_x}, {cur_y + offset_y}')
+            self.get_logger().info(f'----- real_t: {target_x + offset_x}, {target_y + offset_y}')
+            self.get_logger().info(f'------------------')
+            self.get_logger().info(f'----- gps_c: {cur_lat}, {cur_lon}')
+            self.get_logger().info(f'----- gps_t: {target_lat}, {target_lon}')
+            self.get_logger().info(f'------------------')
+            geo_path_request.task_id = str(self.task_id)
+            self.geo_path_pub.publish(geo_path_request)
 
             data['success'] = True
             return data
