@@ -42,6 +42,7 @@ from fastapi import FastAPI
 import uvicorn
 from typing import Optional
 from pydantic import BaseModel
+from pyproj import Transformer
 
 import threading
 app = FastAPI()
@@ -73,9 +74,13 @@ class State:
 class FleetManager(Node):
     def __init__(self, config, nav_path, crs):
         self.config = config
-        self.crs_transformer = None
-        if crs != 'EPSG:3414':
-            self.crs_transformer = CrsTransformer(crs)
+        self.min_x = 22000
+        self.min_y = 31500
+        self.svy_transformer = Transformer.from_crs(crs, 'EPSG:3414')
+        self.crs_transformer = Transformer.from_crs('EPSG:3414', crs)
+        # self.crs_transformer = None
+        # if crs != 'EPSG:3414':
+        #     self.crs_transformer = CrsTransformer('EPSG:3414')
         self.fleet_name = self.config["rmf_fleet"]["name"]
 
         super().__init__(f'{self.fleet_name}_fleet_manager')
@@ -160,10 +165,17 @@ class FleetManager(Node):
             target_map = dest.map_name
             target_speed_limit = dest.speed_limit
 
+            self.get_logger().info(f'----- navigate waypoints from adapter: {target_x}, {target_y}')
+
+            target_x -= self.min_x
+            target_y -= self.min_y
+
             # Ensure that target_x and target_y are in RMF coordinates
-            if self.crs_transformer is not None:
-                target_x, target_y = self.crs_transformer.transform_crs_to_rmf(
-                    target_x, target_y)
+            # if self.crs_transformer is not None:
+            #     target_x, target_y = self.crs_transformer.transform_crs_to_rmf(
+            #         target_x, target_y)
+
+            self.get_logger().info(f'----- final navigate waypoints from manager: {target_x}, {target_y}')
 
             t = self.get_clock().now().to_msg()
 
@@ -257,6 +269,11 @@ class FleetManager(Node):
             self.robots[msg.name].state = msg
             # Check if robot has reached destination
             state = self.robots[msg.name]
+            self.get_logger().info(f'---- manager {msg.name}: {state.state.location.x}, {state.state.location.y}')
+            # Convert current location to appropriate CRS
+            # if self.crs_transformer is not None:
+            #     target_x, target_y = self.crs_transformer.transform_crs_to_rmf(
+            #         target_x, target_y)
             if state.destination is None:
                 return
             destination = state.destination

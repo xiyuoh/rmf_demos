@@ -95,6 +95,8 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
         self.battery_soc = 1.0
         self.api = api
         self.crs_transformer = None
+        self.min_x = 22000
+        self.min_y = 31500
         if crs != 'EPSG:3414':
             self.crs_transformer = CrsTransformer(crs)
         self.position = position  # (x,y,theta) in RMF crs (meters,radians)
@@ -451,6 +453,7 @@ class RobotCommandHandle(adpt.RobotCommandHandle):
     def update(self):
         while rclpy.ok():
             self.position = self.get_position()
+            self.node.get_logger().info(f'---- adapter {self.name}: {self.position[0]}, {self.position[1]}')
             self.battery_soc = self.get_battery_soc()
             if self.update_handle is not None:
                 self.update_state()
